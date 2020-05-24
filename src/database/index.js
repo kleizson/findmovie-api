@@ -1,7 +1,8 @@
-require("dotenv").config();
 const Sequelize = require("sequelize");
-const dbConfig = require("../config/database");
 
-const connection = new Sequelize(dbConfig);
+const connection = new Sequelize("findmoviedb", "root", "root", {
+  host: "localhost",
+  dialect: "postgres",
+});
 
 module.exports = connection;
