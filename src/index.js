@@ -6,4 +6,4 @@ app.use(express.json());
 
 app.use(require("./routes"));
 
-app.listen(process.env.PORT || 3333);
+module.exports = app;
