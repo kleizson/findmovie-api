@@ -1,9 +1,7 @@
 const routes = require("express").Router();
 
-routes.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Funcionou!",
-  });
-});
+const registerController = require("./controllers/registerController");
+
+routes.post("/register", registerController.store);
 
 module.exports = routes;
