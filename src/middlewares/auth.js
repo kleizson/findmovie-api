@@ -1,5 +1,5 @@
+require("dotenv").config({ path: "../../.env" });
 const jwt = require("jsonwebtoken");
-const authConfig = require("../config/auth.json");
 
 module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -32,7 +32,7 @@ module.exports = (req, res, next) => {
     });
   }
 
-  jwt.verify(token, authConfig.secret, (err, decoded) => {
+  jwt.verify(token, process.env.SECRET_AUTH_KEY, (err, decoded) => {
     if (err) {
       return res.status(401).json({
         error: {
@@ -42,7 +42,6 @@ module.exports = (req, res, next) => {
     }
 
     req.userId = decoded.id;
-
     return next();
   });
 };

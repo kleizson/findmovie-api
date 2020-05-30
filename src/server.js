@@ -1,4 +1,4 @@
-const server = require("./index");
 require("dotenv").config({ path: "../.env" });
+const server = require("./index");
 
 server.listen(process.env.PORT || 3333);
