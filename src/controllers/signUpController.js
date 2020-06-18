@@ -1,7 +1,7 @@
+require("dotenv").config();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authConfig = require("../config/auth.json");
 
 module.exports = {
   async store(req, res) {
@@ -11,9 +11,13 @@ module.exports = {
     try {
       const userCreate = await User.create(req.body);
 
-      const token = jwt.sign({ id: userCreate.id }, authConfig.secret, {
-        expiresIn: 86400,
-      });
+      const token = jwt.sign(
+        { id: userCreate.id },
+        process.env.SECRET_AUTH_KEY,
+        {
+          expiresIn: 86400,
+        }
+      );
 
       return res.status(201).json({
         message: "Usuário criado com sucesso!",
